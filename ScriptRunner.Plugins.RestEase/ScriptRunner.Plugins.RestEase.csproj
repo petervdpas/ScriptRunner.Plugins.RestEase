@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputPath>..\Plugins\</OutputPath>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <RootNamespace>ScriptRunner.Plugins.RestEase</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IdentityModel" Version="7.0.0"/>
+        <PackageReference Include="RestSharp" Version="112.1.0"/>
+        <PackageReference Include="ScriptRunner.Plugins" Version="1.0.0"/>
+    </ItemGroup>
+
+</Project>
