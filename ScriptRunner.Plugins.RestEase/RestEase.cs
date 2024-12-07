@@ -147,9 +147,11 @@ public class RestEase : IRestEase
             Content = response.Content ?? string.Empty,
             IsSuccess = response.IsSuccessful,
             Headers = response.Headers?
+                .GroupBy(h => h.Name)
                 .ToDictionary(
-                    h => h.Name,
-                    h => h.Value.ToString()
+                    g => g.Key, 
+                    g => string.Join(
+                        ", ", g.Select(h => h.Value?.ToString() ?? string.Empty)) 
                 ) ?? new Dictionary<string, string>()
         };
     }

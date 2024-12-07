@@ -9,17 +9,20 @@
                 Factory class for creating instances of authenticators based on the specified authentication type.
             </summary>
         </member>
+        <member name="M:ScriptRunner.Plugins.RestEase.AuthenticatorFactory.RegisterAuthenticator(System.String,System.Func{System.Object,ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator})">
+            <summary>
+                Registers a custom authenticator for the factory.
+            </summary>
+            <param name="authType">The authentication type to register.</param>
+            <param name="factory">A factory function to create the authenticator.</param>
+            <exception cref="T:System.ArgumentException">Thrown if authType is null or already registered.</exception>
+        </member>
         <member name="M:ScriptRunner.Plugins.RestEase.AuthenticatorFactory.CreateAuthenticator(System.String,System.Object)">
             <summary>
                 Creates an authenticator instance based on the specified authentication type.
             </summary>
             <param name="authType">The type of authentication (e.g., "none", "bearer", "basic", "oauth2").</param>
-            <param name="options">
-                Optional parameters required for the specific authentication type:
-                - "bearer": A string token.
-                - "basic": A tuple (username, password).
-                - "Oauth2": A tuple (tokenUrl, clientId, clientSecret, scope).
-            </param>
+            <param name="options">Optional parameters required for the specific authentication type.</param>
             <returns>An instance of <see cref="T:ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator" /> configured for the specified authentication type.</returns>
             <exception cref="T:System.ArgumentException">Thrown when an unsupported authentication type is specified or options are invalid.</exception>
         </member>
@@ -151,124 +154,131 @@
         </member>
         <member name="T:ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator">
             <summary>
-            Represents an authenticator for adding authentication details to HTTP requests.
+                Represents an authenticator for adding authentication details to HTTP requests.
             </summary>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator.AuthenticateAsync(RestSharp.RestRequest)">
             <summary>
-            Authenticates the specified HTTP request by adding necessary authentication headers or parameters.
+                Authenticates the specified HTTP request by adding necessary authentication headers or parameters.
             </summary>
             <param name="request">The HTTP request to be authenticated.</param>
             <returns>A task that represents the asynchronous operation of authenticating the request.</returns>
         </member>
         <member name="T:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase">
             <summary>
-            Interface for a REST client service that supports configurable base URL, authentication, and HTTP methods.
+                Interface for a REST client service that supports configurable base URL, authentication, and HTTP methods.
             </summary>
+        </member>
+        <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.RegisterAuthenticator(System.String,System.Func{System.Object,ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator})">
+            <summary>
+                Registers a custom authenticator factory for a specific authentication type.
+            </summary>
+            <param name="authType">The type of authentication (e.g., "custom").</param>
+            <param name="factory">A function that takes an optional object parameter and returns an IAuthenticator instance.</param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.SetBaseUrl(System.String)">
             <summary>
-            Sets the base URL for the REST client.
+                Sets the base URL for the REST client.
             </summary>
             <param name="baseUrl">The base URL for the REST API.</param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.SetAuthentication(System.String,System.Object)">
             <summary>
-            Configures the authentication type for the REST client.
+                Configures the authentication type for the REST client.
             </summary>
             <param name="authType">The type of authentication (e.g., "bearer", "basic", "oauth2").</param>
             <param name="authOptions">Optional parameters required for the specified authentication type. Can be null.</param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.Initialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
-            Initializes the REST client with the specified configuration settings.
+                Initializes the REST client with the specified configuration settings.
             </summary>
             <param name="configuration">
-            A dictionary containing key-value pairs for configuration settings, such as timeouts or default headers.
+                A dictionary containing key-value pairs for configuration settings, such as timeouts or default headers.
             </param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.GetAsync(System.String)">
             <summary>
-            Executes a GET request to the specified resource.
+                Executes a GET request to the specified resource.
             </summary>
             <param name="resource">The resource endpoint.</param>
-            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse"/>.</returns>
+            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse" />.</returns>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.PostAsync(System.String,System.Object)">
             <summary>
-            Executes a POST request to the specified resource with a body.
+                Executes a POST request to the specified resource with a body.
             </summary>
             <param name="resource">The resource endpoint.</param>
             <param name="body">The body of the request.</param>
-            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse"/>.</returns>
+            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse" />.</returns>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.PutAsync(System.String,System.Object)">
             <summary>
-            Executes a PUT request to the specified resource with a body.
+                Executes a PUT request to the specified resource with a body.
             </summary>
             <param name="resource">The resource endpoint.</param>
             <param name="body">The body of the request.</param>
-            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse"/>.</returns>
+            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse" />.</returns>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Interfaces.IRestEase.DeleteAsync(System.String)">
             <summary>
-            Executes a DELETE request to the specified resource.
+                Executes a DELETE request to the specified resource.
             </summary>
             <param name="resource">The resource endpoint.</param>
-            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse"/>.</returns>
+            <returns>A task representing the asynchronous operation, returning a <see cref="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse" />.</returns>
         </member>
         <member name="T:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse">
             <summary>
-            Represents a response from a RESTful API request.
+                Represents a response from a RESTful API request.
             </summary>
         </member>
         <member name="P:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse.StatusCode">
             <summary>
-            Gets or sets the HTTP status code returned by the API.
+                Gets or sets the HTTP status code returned by the API.
             </summary>
         </member>
         <member name="P:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse.Content">
             <summary>
-            Gets or sets the content of the response body.
+                Gets or sets the content of the response body.
             </summary>
         </member>
         <member name="P:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse.IsSuccess">
             <summary>
-            Gets or sets a value indicating whether the API request was successful.
+                Gets or sets a value indicating whether the API request was successful.
             </summary>
         </member>
         <member name="P:ScriptRunner.Plugins.RestEase.Models.RestEaseResponse.Headers">
             <summary>
-            Gets or sets the collection of headers included in the API response.
+                Gets or sets the collection of headers included in the API response.
             </summary>
         </member>
         <member name="T:ScriptRunner.Plugins.RestEase.Plugin">
             <summary>
-            A plugin that registers and provides a restful client.
+                A plugin that registers and provides a restful client.
             </summary>
             <remarks>
-            This plugin demonstrates how to register a service with the host application's DI container.
+                This plugin demonstrates how to register a service with the host application's DI container.
             </remarks>
         </member>
         <member name="P:ScriptRunner.Plugins.RestEase.Plugin.Name">
             <summary>
-            Gets the name of the plugin.
+                Gets the name of the plugin.
             </summary>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Plugin.Initialize(System.Collections.Generic.IDictionary{System.String,System.Object})">
             <summary>
-            Initializes the plugin with the provided configuration.
+                Initializes the plugin with the provided configuration.
             </summary>
             <param name="configuration">A dictionary containing key-value pairs for the plugin's configuration.</param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Plugin.Execute">
             <summary>
-            Executes the plugin's main functionality.
+                Executes the plugin's main functionality.
             </summary>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.Plugin.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            Registers the plugin's services into the application's dependency injection container.
+                Registers the plugin's services into the application's dependency injection container.
             </summary>
             <param name="services">The service collection to register the plugin's services into.</param>
         </member>
@@ -276,6 +286,13 @@
             <summary>
                 Provides a REST client service for executing HTTP requests with optional dynamic authentication.
             </summary>
+        </member>
+        <member name="M:ScriptRunner.Plugins.RestEase.RestEase.RegisterAuthenticator(System.String,System.Func{System.Object,ScriptRunner.Plugins.RestEase.Interfaces.IAuthenticator})">
+            <summary>
+                Registers a custom authenticator factory for a specific authentication type.
+            </summary>
+            <param name="authType">The type of authentication (e.g., "custom").</param>
+            <param name="factory">A function that takes an optional object parameter and returns an IAuthenticator instance.</param>
         </member>
         <member name="M:ScriptRunner.Plugins.RestEase.RestEase.SetBaseUrl(System.String)">
             <summary>

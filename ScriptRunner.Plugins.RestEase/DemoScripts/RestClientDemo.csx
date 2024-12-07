@@ -18,15 +18,15 @@ var queryParams = new
 };
 
 // Create and configure the RestService
-var restService = new RestService();
-restService.SetBaseUrl("https://api.coingecko.com/api/v3");
+var restEase = new RestEase();
+restEase.SetBaseUrl("https://api.coingecko.com/api/v3");
 
 // Convert query parameters to query string
 var queryString = string.Join("&", queryParams.GetType().GetProperties()
     .Select(p => $"{p.Name}={Uri.EscapeDataString(p.GetValue(queryParams)?.ToString() ?? string.Empty)}"));
 
 // Perform a GET request with the query string
-var response = await restService.GetAsync($"/coins/markets?{queryString}");
+var response = await restEase.GetAsync($"/coins/markets?{queryString}");
 
 Dump(response.Content.ReformatJson());
 

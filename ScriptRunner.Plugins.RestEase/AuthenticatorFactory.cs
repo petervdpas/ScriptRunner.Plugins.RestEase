@@ -10,30 +10,7 @@ namespace ScriptRunner.Plugins.RestEase;
 /// </summary>
 public static class AuthenticatorFactory
 {
-    private static readonly Dictionary<string, Func<object?, IAuthenticator>> AuthenticatorRegistry =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            { "none", _ => new NoAuthenticator() },
-            { "bearer", options => CreateBearerTokenAuthenticator(options) },
-            { "basic", options => CreateBasicAuthenticator(options) },
-            { "oauth2", options => CreateOAuth2Authenticator(options) }
-        };
-
-    /// <summary>
-    ///     Creates an authenticator instance based on the specified authentication type.
-    /// </summary>
-    /// <param name="authType">The type of authentication (e.g., "none", "bearer", "basic", "oauth2").</param>
-    /// <param name="options">Optional parameters required for the specific authentication type.</param>
-    /// <returns>An instance of <see cref="IAuthenticator" /> configured for the specified authentication type.</returns>
-    /// <exception cref="ArgumentException">Thrown when an unsupported authentication type is specified or options are invalid.</exception>
-    public static IAuthenticator CreateAuthenticator(string authType, object? options = null)
-    {
-        ArgumentNullException.ThrowIfNull(authType);
-
-        if (AuthenticatorRegistry.TryGetValue(authType, out var factory)) return factory(options);
-
-        throw new ArgumentException($"Unsupported authentication type: {authType}");
-    }
+    private static readonly Dictionary<string, Func<object?, IAuthenticator>> CustomFactories = new(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     ///     Registers a custom authenticator for the factory.
@@ -43,9 +20,36 @@ public static class AuthenticatorFactory
     /// <exception cref="ArgumentException">Thrown if authType is null or already registered.</exception>
     public static void RegisterAuthenticator(string authType, Func<object?, IAuthenticator> factory)
     {
-        if (string.IsNullOrWhiteSpace(authType)) throw new ArgumentException("Auth type cannot be null or empty.");
-        if (!AuthenticatorRegistry.TryAdd(authType, factory))
-            throw new ArgumentException($"Authenticator for type '{authType}' is already registered.");
+        if (string.IsNullOrWhiteSpace(authType))
+            throw new ArgumentException("Authentication type cannot be null or empty.", nameof(authType));
+
+        ArgumentNullException.ThrowIfNull(factory);
+
+        CustomFactories[authType] = factory;
+    }
+    
+    /// <summary>
+    ///     Creates an authenticator instance based on the specified authentication type.
+    /// </summary>
+    /// <param name="authType">The type of authentication (e.g., "none", "bearer", "basic", "oauth2").</param>
+    /// <param name="options">Optional parameters required for the specific authentication type.</param>
+    /// <returns>An instance of <see cref="IAuthenticator" /> configured for the specified authentication type.</returns>
+    /// <exception cref="ArgumentException">Thrown when an unsupported authentication type is specified or options are invalid.</exception>
+    public static IAuthenticator CreateAuthenticator(string authType, object? options = null)
+    {
+        if (CustomFactories.TryGetValue(authType, out var factory))
+        {
+            return factory(options);
+        }
+
+        return authType.ToLower() switch
+        {
+            "none" => new NoAuthenticator(),
+            "bearer" => CreateBearerTokenAuthenticator(options),
+            "basic" => CreateBasicAuthenticator(options),
+            "oauth2" => CreateOAuth2Authenticator(options),
+            _ => throw new ArgumentException($"Unsupported authentication type: {authType}")
+        };
     }
 
     /// <summary>
