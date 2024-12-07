@@ -14,7 +14,7 @@ namespace ScriptRunner.Plugins.RestEase;
 /// </remarks>
 [PluginMetadata(
     "RestEase Plugin",
-    "Registers an example service.",
+    "The RestEase Restful Client Plugin for ScriptRunner.",
     "Peter van de Pas",
     "1.0.0",
     "net8.0",
