@@ -16,7 +16,7 @@ namespace ScriptRunner.Plugins.RestEase;
     "RestEase Plugin",
     "The RestEase Restful Client Plugin for ScriptRunner.",
     "Peter van de Pas",
-    "1.0.0",
+    "1.0.2",
     "net8.0",
     ["IRestEase"])]
 public class Plugin : IServicePlugin
