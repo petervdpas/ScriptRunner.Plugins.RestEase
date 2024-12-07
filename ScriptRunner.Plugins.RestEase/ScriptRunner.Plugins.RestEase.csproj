@@ -4,10 +4,9 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <OutputPath>..\Plugins\</OutputPath>
-        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <DocumentationFile>..\Plugins\$(AssemblyName).xml</DocumentationFile>
         <RootNamespace>ScriptRunner.Plugins.RestEase</RootNamespace>
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,4 +19,32 @@
         <Content Include="CookBookPages\**\*" CopyToOutputDirectory="PreserveNewest" />
         <Content Include="DemoScripts\**\*" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
+
+    <!-- Separate Plugin DLL and Dependencies -->
+    <Target Name="SeparatePluginAndDependencies" AfterTargets="Build">
+        <!-- Ensure Dependencies subdirectory exists -->
+        <MakeDir Directories="..\Plugins\Dependencies" />
+
+        <!-- Collect the plugin DLL -->
+        <ItemGroup>
+            <PluginAssembly Include="$(TargetDir)$(AssemblyName).dll" />
+        </ItemGroup>
+
+        <!-- Copy the plugin DLL to the Plugins directory -->
+        <Copy SourceFiles="@(PluginAssembly)"
+              DestinationFolder="..\Plugins"
+              SkipUnchangedFiles="true" />
+
+        <!-- Collect dependencies explicitly from the build output -->
+        <ItemGroup>
+            <DependencyAssemblies Include="$(TargetDir)**\*.dll"
+                                  Exclude="$(TargetDir)$(AssemblyName).dll" />
+        </ItemGroup>
+
+        <!-- Copy dependencies to the Dependencies subdirectory -->
+        <Copy SourceFiles="@(DependencyAssemblies)"
+              DestinationFolder="..\Plugins\Dependencies"
+              SkipUnchangedFiles="true" />
+    </Target>
+    
 </Project>
