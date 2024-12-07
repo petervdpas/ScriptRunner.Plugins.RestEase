@@ -1,3 +1,16 @@
+---
+Title: The RestEase Restful Client
+Subtitle: Fetch Cryptocurrency Market Data from CoinGecko Using RestEase Client
+Category: Cookbook
+Author: Peter van de Pas
+keywords: [CookBook, RestEase, CoinGecko]
+table-use-row-colors: true
+table-row-color: "D3D3D3"
+toc: true
+toc-title: Table of Content
+toc-own-page: true
+---
+
 # Recipe: Fetch Cryptocurrency Market Data from CoinGecko Using RestEase Client
 
 ## Goal
@@ -34,7 +47,7 @@ Each script in ScriptRunner includes metadata for categorization and identificat
 
 ### 2. Initialize the RestEase Plugin
 
-Get an instance of the `IRestEase` plugin using `PluginLoader`. Then, set the base URL for the CoinGecko API:
+Get an instance of the **IRestEase** plugin using **PluginLoader**. Then, set the base URL for the CoinGecko API:
 
 ```csharp
 var restEase = PluginLoader.GetPlugin<ScriptRunner.Plugins.RestEase.IRestEase>();
@@ -68,7 +81,7 @@ var queryString = string.Join("&", queryParams.GetType().GetProperties()
 
 ### 5. Perform the API Request
 
-Use the `GetAsync` method to send the GET request with the query string and receive the response:
+Use the **GetAsync** method to send the GET request with the query string and receive the response:
 
 ```csharp
 var response = await restEase.GetAsync($"/coins/markets?{queryString}");
