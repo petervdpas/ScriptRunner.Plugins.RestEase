@@ -15,4 +15,8 @@
         <PackageReference Include="ScriptRunner.Plugins" Version="1.0.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="CookBookPages\**\*" CopyToOutputDirectory="PreserveNewest" />
+        <Content Include="DemoScripts\**\*" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
 </Project>
