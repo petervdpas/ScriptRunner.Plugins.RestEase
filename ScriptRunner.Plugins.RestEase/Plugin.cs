@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using ScriptRunner.Plugins.Attributes;
 using ScriptRunner.Plugins.RestEase.Interfaces;
+using ScriptRunner.Plugins.Utilities;
 
 namespace ScriptRunner.Plugins.RestEase;
 
@@ -18,8 +19,8 @@ namespace ScriptRunner.Plugins.RestEase;
     description: "A plugin that provides a RestEase RESTful client for ScriptRunner.",
     author: "Peter van de Pas",
     version: "1.0.2",
-    pluginSystemVersion: "1.0.26",
-    frameworkVersion: ".NET 8.0",
+    pluginSystemVersion: PluginSystemConstants.CurrentPluginSystemVersion,
+    frameworkVersion: PluginSystemConstants.CurrentFrameworkVersion,
     services: ["IRestEase"])]
 public class Plugin : BaseAsyncServicePlugin
 {
