@@ -18,7 +18,7 @@ namespace ScriptRunner.Plugins.RestEase;
     name: "RestEase Plugin",
     description: "A plugin that provides a RestEase RESTful client for ScriptRunner.",
     author: "Peter van de Pas",
-    version: "1.0.2",
+    version: "1.0.0",
     pluginSystemVersion: PluginSystemConstants.CurrentPluginSystemVersion,
     frameworkVersion: PluginSystemConstants.CurrentFrameworkVersion,
     services: ["IRestEase"])]

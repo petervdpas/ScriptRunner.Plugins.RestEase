@@ -1,5 +1,8 @@
 # ScriptRunner.Plugins.RestEase
 
+![License](https://img.shields.io/badge/license-MIT-green)  
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+
 A powerful plugin for **ScriptRunner** designed to simplify RESTful API integrations. This plugin leverages RestSharp to enable seamless interaction with REST APIs, supporting dynamic authentication, flexible configurations, and easy-to-use methods for common HTTP operations.
 
 ---
@@ -125,4 +128,7 @@ This plugin is licensed under the [MIT License](https://opensource.org/licenses/
 ## 🔗 Links
 
 - [ScriptRunner Plugins Repository](https://github.com/petervdpas/ScriptRunner.Plugins)
-- [RestSharp Documentation](https://restsharp.dev/)
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
