@@ -125,9 +125,19 @@ This plugin is licensed under the [MIT License](https://opensource.org/licenses/
 
 ---
 
+## Author
+
+Developed with **🧡 passion** by **Peter van de Pas**.
+
+For any questions or feedback, feel free to open an issue or contact me directly!
+
+---
+
 ## 🔗 Links
 
 - [ScriptRunner Plugins Repository](https://github.com/petervdpas/ScriptRunner.Plugins)
+
+---
 
 ## License
 
