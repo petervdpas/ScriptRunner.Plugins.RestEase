@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Dynamic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using ScriptRunner.Plugins.Attributes;
+using ScriptRunner.Plugins.Models;
 using ScriptRunner.Plugins.RestEase.Interfaces;
 using ScriptRunner.Plugins.Utilities;
 
@@ -33,9 +34,9 @@ public class Plugin : BaseAsyncServicePlugin
     /// Asynchronously initializes the plugin using the provided configuration.
     /// </summary>
     /// <param name="configuration">A dictionary containing configuration key-value pairs for the plugin.</param>
-    public override async Task InitializeAsync(ExpandoObject configuration)
+    public override async Task InitializeAsync(IEnumerable<PluginSettingDefinition> configuration)
     {
-        ExpandoObjectHelper.DisplayValues(configuration);
+        PluginSettingsHelper.DisplayValues(configuration);
         
         await Task.CompletedTask;
     }
