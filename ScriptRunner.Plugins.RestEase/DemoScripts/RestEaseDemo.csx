@@ -1,7 +1,7 @@
 /*
 {
-    "TaskCategory": "Networking",
-    "TaskName": "Fetch Cryptocurrency Market Data",
+    "TaskCategory": "Plugins",
+    "TaskName": "RestEase Demo Script",
     "TaskDetail": "This script fetches cryptocurrency market data from CoinGecko."
 }
 */

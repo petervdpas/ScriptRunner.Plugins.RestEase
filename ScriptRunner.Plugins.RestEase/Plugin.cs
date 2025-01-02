@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using ScriptRunner.Plugins.Attributes;
@@ -15,8 +15,8 @@ namespace ScriptRunner.Plugins.RestEase;
 ///     This plugin demonstrates how to register a service with the host application's DI container.
 /// </remarks>
 [PluginMetadata(
-    name: "RestEase Plugin",
-    description: "A plugin that provides a RestEase RESTful client for ScriptRunner.",
+    name: "RestEase",
+    description: "A plugin that provides a easy RESTful client for ScriptRunner.",
     author: "Peter van de Pas",
     version: "1.0.0",
     pluginSystemVersion: PluginSystemConstants.CurrentPluginSystemVersion,
@@ -27,19 +27,17 @@ public class Plugin : BaseAsyncServicePlugin
     /// <summary>
     /// Gets the name of the plugin.
     /// </summary>
-    public override string Name => "RestEase Plugin";
+    public override string Name => "RestEase";
 
     /// <summary>
     /// Asynchronously initializes the plugin using the provided configuration.
     /// </summary>
     /// <param name="configuration">A dictionary containing configuration key-value pairs for the plugin.</param>
-    public override async Task InitializeAsync(IDictionary<string, object> configuration)
+    public override async Task InitializeAsync(ExpandoObject configuration)
     {
-        // Simulate async initialization (e.g., loading settings or validating configurations)
-        await Task.Delay(100);
-        Console.WriteLine(configuration.TryGetValue("RestEaseKey", out var restEaseValue)
-            ? $"RestEaseKey value: {restEaseValue}"
-            : "RestEaseKey not found in configuration.");
+        ExpandoObjectHelper.DisplayValues(configuration);
+        
+        await Task.CompletedTask;
     }
     
     /// <summary>
