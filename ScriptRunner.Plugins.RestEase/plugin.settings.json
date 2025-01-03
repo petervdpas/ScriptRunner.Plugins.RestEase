@@ -1,8 +1,8 @@
 [
   {
-    "Key": "SomeKey",
+    "Key": "PluginName",
     "Type": "string",
-    "DefaultValue": "DefaultValue"
+    "DefaultValue": "RestEase"
   },
   {
     "Key": "MaxRetries",
