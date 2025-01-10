@@ -7,7 +7,7 @@
 }
 */
 
-var restEase = PluginLoader.GetPlugin<ScriptRunner.Plugins.RestEase.IRestEase>();
+var restEase = new RestEase();
 restEase.SetBaseUrl("https://api.coingecko.com/api/v3");
 
 var queryParams = new
