@@ -114,7 +114,8 @@ Here’s the complete script for reference:
 {
     "TaskCategory": "Networking",
     "TaskName": "Fetch Cryptocurrency Market Data",
-    "TaskDetail": "This script fetches cryptocurrency market data from CoinGecko."
+    "TaskDetail": "This script fetches cryptocurrency market data from CoinGecko.",
+    "RequiredPlugins": ["RestEase"]
 }
 */
 

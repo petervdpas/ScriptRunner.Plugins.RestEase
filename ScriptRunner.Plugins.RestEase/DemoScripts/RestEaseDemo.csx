@@ -2,7 +2,8 @@
 {
     "TaskCategory": "Plugins",
     "TaskName": "RestEase Demo Script",
-    "TaskDetail": "This script fetches cryptocurrency market data from CoinGecko."
+    "TaskDetail": "This script fetches cryptocurrency market data from CoinGecko.",
+    "RequiredPlugins": ["RestEase"]
 }
 */
 
