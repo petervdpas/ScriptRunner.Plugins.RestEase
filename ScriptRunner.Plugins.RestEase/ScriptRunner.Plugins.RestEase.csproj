@@ -12,7 +12,7 @@
     <ItemGroup>
         <PackageReference Include="IdentityModel" Version="7.0.0"/>
         <PackageReference Include="RestSharp" Version="112.1.0"/>
-        <PackageReference Include="ScriptRunner.Plugins" Version="1.8.56" />
+        <PackageReference Include="ScriptRunner.Plugins" Version="1.8.56"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -21,43 +21,43 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
-    
+
     <!-- Separate Plugin DLL and Dependencies -->
     <Target Name="SeparatePluginAndDependencies" AfterTargets="Build">
 
         <!-- Ensure Dependencies subdirectory exists -->
-        <MakeDir Directories="..\Plugins" />
+        <MakeDir Directories="..\Plugins"/>
 
         <!-- Recursively Copy EVERYTHING from $(TargetDir), including subdirectories -->
         <ItemGroup>
-            <AllFiles Include="$(TargetDir)**\*" />
+            <AllFiles Include="$(TargetDir)**\*"/>
         </ItemGroup>
 
         <!-- Recursively Copy Files While Preserving Directory Structure -->
         <Copy SourceFiles="@(AllFiles)"
               DestinationFiles="..\Plugins\%(RecursiveDir)%(Filename)%(Extension)"
-              SkipUnchangedFiles="false" />
+              SkipUnchangedFiles="false"/>
 
         <!-- Copy DemoScripts and CookBooks to the Plugins directory -->
         <ItemGroup>
-            <DemoScripts Include="$(ProjectDir)DemoScripts\**\*" />
-            <CookBookPages Include="$(ProjectDir)CookBookPages\**\*" />
+            <DemoScripts Include="$(ProjectDir)DemoScripts\**\*"/>
+            <CookBookPages Include="$(ProjectDir)CookBookPages\**\*"/>
         </ItemGroup>
 
         <Copy SourceFiles="@(DemoScripts)"
               DestinationFolder="..\Plugins\DemoScripts"
-              SkipUnchangedFiles="true" />
+              SkipUnchangedFiles="true"/>
 
         <Copy SourceFiles="@(CookBookPages)"
               DestinationFolder="..\Plugins\CookBookPages"
-              SkipUnchangedFiles="true" />
+              SkipUnchangedFiles="true"/>
 
         <!-- Check if PowerShell is available -->
         <Exec Command="powershell -File CheckPowerShell.ps1"
               IgnoreExitCode="true"
               StandardOutputImportance="high"
               StandardErrorImportance="high">
-            <Output TaskParameter="ExitCode" PropertyName="PowerShellAvailable" />
+            <Output TaskParameter="ExitCode" PropertyName="PowerShellAvailable"/>
         </Exec>
 
         <!-- Define Compression and Cleanup Commands -->
@@ -74,12 +74,12 @@
         </PropertyGroup>
 
         <!-- Execute Compression and Cleanup if PowerShell is available -->
-        <Exec Command="$(CompressionCommand)" Condition="'$(PowerShellAvailable)' == '0'" />
-        <Exec Command="$(CleanupCommand)" Condition="'$(PowerShellAvailable)' == '0'" />
+        <Exec Command="$(CompressionCommand)" Condition="'$(PowerShellAvailable)' == '0'"/>
+        <Exec Command="$(CleanupCommand)" Condition="'$(PowerShellAvailable)' == '0'"/>
 
         <!-- Notify the user if PowerShell is not available -->
-        <Exec Command="$(NotifyCommand)" Condition="'$(PowerShellAvailable)' != '0'" />
+        <Exec Command="$(NotifyCommand)" Condition="'$(PowerShellAvailable)' != '0'"/>
 
     </Target>
-    
+
 </Project>

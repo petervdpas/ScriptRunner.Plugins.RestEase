@@ -15,11 +15,13 @@ toc-own-page: true
 
 ## Goal
 
-Learn how to leverage the **RestEase Client** plugin in ScriptRunner to query CoinGecko's API for cryptocurrency market data efficiently.
+Learn how to leverage the **RestEase Client** plugin in ScriptRunner to query CoinGecko's API for cryptocurrency market
+data efficiently.
 
 ## Overview
 
 This recipe demonstrates how to:
+
 1. Configure the RestEase client with a base URL.
 2. Dynamically build a query string.
 3. Execute an HTTP GET request to fetch cryptocurrency data.
@@ -33,7 +35,8 @@ By the end of this tutorial, you'll have a working script that fetches cryptocur
 
 ### 1. Define Task Metadata
 
-Each script in ScriptRunner includes metadata for categorization and identification. Add the following JSON metadata to your script:
+Each script in ScriptRunner includes metadata for categorization and identification. Add the following JSON metadata to
+your script:
 
 ```csharp
 /*
@@ -56,7 +59,8 @@ restEase.SetBaseUrl("https://api.coingecko.com/api/v3");
 
 ### 3. Define Query Parameters
 
-Specify the parameters required for the CoinGecko API request. These include the target currency, the cryptocurrencies to fetch, and other options:
+Specify the parameters required for the CoinGecko API request. These include the target currency, the cryptocurrencies
+to fetch, and other options:
 
 ```csharp
 var queryParams = new
@@ -145,12 +149,16 @@ return "Cryptocurrency data fetched successfully.";
 
 ## Expected Output
 
-When executed, this script will fetch data for Bitcoin and Ethereum, including their market prices, ranks, and other information. The response will be displayed in a neatly formatted JSON structure.
+When executed, this script will fetch data for Bitcoin and Ethereum, including their market prices, ranks, and other
+information. The response will be displayed in a neatly formatted JSON structure.
 
 ---
 
 ## Tips & Notes
 
-- **CoinGecko API Documentation**: Refer to [CoinGecko's API documentation](https://www.coingecko.com/en/api/documentation) for additional endpoints and parameters.
-- **Customization**: Modify the query parameters to fetch data for different cryptocurrencies or customize the sorting and pagination options.
+- **CoinGecko API Documentation**: Refer
+  to [CoinGecko's API documentation](https://www.coingecko.com/en/api/documentation) for additional endpoints and
+  parameters.
+- **Customization**: Modify the query parameters to fetch data for different cryptocurrencies or customize the sorting
+  and pagination options.
 - **Error Handling**: Enhance the script to handle API errors or unexpected responses gracefully.

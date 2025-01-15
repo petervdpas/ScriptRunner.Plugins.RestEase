@@ -10,7 +10,8 @@ namespace ScriptRunner.Plugins.RestEase;
 /// </summary>
 public static class AuthenticatorFactory
 {
-    private static readonly Dictionary<string, Func<object?, IAuthenticator>> CustomFactories = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly Dictionary<string, Func<object?, IAuthenticator>> CustomFactories =
+        new(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     ///     Registers a custom authenticator for the factory.
@@ -27,7 +28,7 @@ public static class AuthenticatorFactory
 
         CustomFactories[authType] = factory;
     }
-    
+
     /// <summary>
     ///     Creates an authenticator instance based on the specified authentication type.
     /// </summary>
@@ -37,10 +38,7 @@ public static class AuthenticatorFactory
     /// <exception cref="ArgumentException">Thrown when an unsupported authentication type is specified or options are invalid.</exception>
     public static IAuthenticator CreateAuthenticator(string authType, object? options = null)
     {
-        if (CustomFactories.TryGetValue(authType, out var factory))
-        {
-            return factory(options);
-        }
+        if (CustomFactories.TryGetValue(authType, out var factory)) return factory(options);
 
         return authType.ToLower() switch
         {
