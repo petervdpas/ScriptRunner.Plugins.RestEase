@@ -2,16 +2,19 @@
   {
     "Key": "PluginName",
     "Type": "string",
-    "DefaultValue": "RestEase"
+    "DefaultValue": "RestEase",
+    "IsSecret": false
   },
   {
     "Key": "MaxRetries",
     "Type": "int",
-    "DefaultValue": 3
+    "DefaultValue": 3,
+    "IsSecret": false
   },
   {
     "Key": "EnableLogging",
     "Type": "bool",
-    "DefaultValue": true
+    "DefaultValue": true,
+    "IsSecret": false
   }
 ]
