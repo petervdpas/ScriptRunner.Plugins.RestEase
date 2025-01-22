@@ -12,7 +12,7 @@
     <ItemGroup>
         <PackageReference Include="IdentityModel" Version="7.0.0"/>
         <PackageReference Include="RestSharp" Version="112.1.0"/>
-        <PackageReference Include="ScriptRunner.Plugins" Version="1.8.60" />
+        <PackageReference Include="ScriptRunner.Plugins" Version="1.8.62" />
     </ItemGroup>
 
     <ItemGroup>
